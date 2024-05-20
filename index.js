@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/users.js'
 import carRoutes from './routes/cars.js'
@@ -7,7 +8,11 @@ import toolbardefRoutes from './routes/toolbardefs.js'
 
 const app = express()
 const PORT = 5001
+// const corsOptions = {
+//     origin: ['http://localhost:5173']
+// }
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use('/users', userRoutes)
 app.use('/cars', carRoutes)

@@ -1,6 +1,8 @@
 import express from 'express'
 import path from 'path'
 import { readFileSync } from 'fs'
+import ColumnDefDto from '../dtos/ColumnDefDto.js'
+import { cleanProps } from '../utils.js'
 
 const router = express.Router()
 
@@ -10,8 +12,10 @@ const columndefs = JSON.parse(readFileSync(filePath))
 
 router.get('/:tablename', (req, res) => {
     const { tablename } = req.params
-    const foundDef = columndefs.filter((def) => def.tableName === tablename)
-    res.send(foundDef)
+    const defs = columndefs.filter(
+        (def) => def.tableName.toLowerCase() === tablename.toLowerCase()
+    )
+    res.send(defs.map((def) => cleanProps(new ColumnDefDto(def))))
 })
 
 export default router

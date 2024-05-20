@@ -23,4 +23,16 @@ function camelCase(key) {
     return key.substring(0, 1).toLowerCase() + key.substring(1)
 }
 
-export { jsonStringify, renameKeys }
+function cleanProps(obj) {
+    for (const prop in obj) {
+        if (
+            obj[prop] === undefined ||
+            obj[prop] === null ||
+            obj[prop].length === 0
+        )
+            delete obj[prop]
+    }
+    return obj
+}
+
+export { jsonStringify, renameKeys, cleanProps }
