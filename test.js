@@ -2,8 +2,8 @@ import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import cars from './data/cars.js'
 
-const filePath = path.resolve('.') + '/data/toolbardefs.json'
-// const destPath = path.resolve('.') + '/data/cars.js'
+const filePath = path.resolve('.') + '/data/persons.json'
+// const destPath = path.resolve('.') + '/data/cars.json'
 
 const data = JSON.parse(readFileSync(filePath))
 
@@ -49,6 +49,10 @@ function jsonStringify(data) {
         ? '[' + data.map((e) => JSON.stringify(e)).join(',\n ') + ']'
         : JSON.stringify(data)
 }
+
+// function keyReplacer(key, value) {
+//     return [camelCase(key)]
+// }
 
 // writeFileSync(destPath, data)
 // console.log(cars)

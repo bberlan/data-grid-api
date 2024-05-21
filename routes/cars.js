@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 
     cars.push({ id: uuidv4(), ...car, DateCreated: now })
 
-    writeFileSync(pathCars, jsonStringify(cars))
+    writeFileSync(pathCars, JSON.stringify(cars, null, 2))
 
     res.send(`${car.first_name} has been added to the Database`)
 })
@@ -36,7 +36,14 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
     const { id } = req.params
 
-    writeFileSync(pathCars, jsonStringify(cars.filter((car) => car.id !== id)))
+    writeFileSync(
+        pathCars,
+        JSON.stringify(
+            cars.filter((car) => car.id !== id),
+            null,
+            2
+        )
+    )
 
     res.send(`${id} deleted successfully from database`)
 })
@@ -59,7 +66,7 @@ router.patch('/:id', (req, res) => {
         return user
     })
 
-    writeFileSync(pathUsers, jsonStringify(updatedCars))
+    writeFileSync(pathUsers, JSON.stringify(updatedCars, null, 2))
 
     res.send(`User with the ${id} has been updated`)
 })

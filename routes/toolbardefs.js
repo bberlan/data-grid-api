@@ -11,7 +11,7 @@ const toolbardefs = JSON.parse(readFileSync(filePath))
 router.get('/:tablename', (req, res) => {
     const { tablename } = req.params
     const defs = toolbardefs.filter(
-        (def) => def.tab.toLoweCase() === tablename.toLowerCase()
+        (def) => def.tab.toLowerCase() === tablename.toLowerCase()
     )
     res.send(defs)
 })
