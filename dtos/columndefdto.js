@@ -27,31 +27,31 @@ export default class ColumnDefDto {
     suppressSizeToFit
 
     constructor(data) {
-        this.headerName = data.headerName
-        this.headerClass = data.headerClass
-        this.field = data.field
-        this.type = data.type
-        this.valueGetter = data.valueGetter
-        this.valueFormatter = data.valueFormatter
-        this.valueSetter = data.valueSetter
-        this.keyCreator = data.keyCreator
-        this.sortable = data.sortable
-        this.initialSort = data.initialSort
-        this.filter = data.filter
-        this.checkboxSelection = data.checkboxSelection
-        this.headerCheckboxSelection = data.headerCheckboxSelection
-        this.initialHide = data.initialHide
-        this.width = data.width
-        this.flex = data.flex
-        this.lockPosition = data.lockPosition
-        this.pinned = data.pinned
-        this.resizable = data.resizable
-        this.editable = data.editable
-        this.cellClass = data.cellClass
-        this.cellRenderer = data.cellRenderer
-        this.cellEditor = data.cellEditor
-        this.cellEditorPopup = data.cellEditorPopup
-        this.cellEditorParams = data.cellEditorParams
-        this.suppressSizeToFit = data.suppressSizeToFit
+        this.headerName = data.headerName ?? undefined
+        this.headerClass = data.headerClass ?? undefined
+        this.field = data.field ?? undefined
+        this.type = data.type ?? undefined
+        this.valueGetter = data.valueGetter ?? undefined
+        this.valueFormatter = data.valueFormatter ?? undefined
+        this.valueSetter = data.valueSetter ?? undefined
+        this.keyCreator = data.keyCreator ?? undefined
+        this.sortable = data.sortable ?? undefined
+        this.initialSort = data.initialSort ?? undefined
+        this.filter = data.filter ?? undefined
+        this.checkboxSelection = data.checkboxSelection ?? undefined
+        this.headerCheckboxSelection = data.headerCheckboxSelection ?? undefined
+        this.initialHide = data.initialHide ?? undefined
+        this.width = data.width ?? undefined
+        this.flex = data.flex ?? undefined
+        this.lockPosition = data.lockPosition ?? undefined
+        this.pinned = data.pinned ?? undefined
+        this.resizable = data.resizable ?? undefined
+        this.editable = data.editable ?? undefined
+        this.cellClass = data.cellClass ?? undefined
+        this.cellRenderer = data.cellRenderer ?? undefined
+        this.cellEditor = data.cellEditor ?? undefined
+        this.cellEditorPopup = data.cellEditorPopup ?? undefined
+        this.cellEditorParams = data.cellEditorParams ?? undefined
+        this.suppressSizeToFit = data.suppressSizeToFit ?? undefined
     }
 }
