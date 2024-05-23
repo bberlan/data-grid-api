@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import cars from './data/cars.js'
 
-const filePath = path.resolve('.') + '/data/persons.json'
+const filePath = path.resolve('.') + '/data/cars.json'
 // const destPath = path.resolve('.') + '/data/cars.json'
 
 const data = JSON.parse(readFileSync(filePath))
@@ -50,6 +50,28 @@ function jsonStringify(data) {
         : JSON.stringify(data)
 }
 
+function booleanReplacer(key, value) {
+    if (
+        [
+            'sortable',
+            'filter',
+            'resizable',
+            'checkboxSelection',
+            'headerCheckboxSelection',
+            'electric'
+        ].includes(key) &&
+        value !== null &&
+        typeof value !== 'boolean'
+    ) {
+        return value ? true : false
+    }
+    return value
+}
+
+// console.log(JSON.stringify(data, booleanReplacer, 2))
+
+writeFileSync(filePath, JSON.stringify(data, booleanReplacer, 2))
+
 // function keyReplacer(key, value) {
 //     return [camelCase(key)]
 // }
@@ -63,4 +85,4 @@ function jsonStringify(data) {
 // console.log(renameKeys(data))
 // console.log(jsonStringify(renameKeys(data)))
 // console.log(jsonStringify(rename(data)))
-writeFileSync(filePath, jsonStringify(renameKeys(data)))
+// writeFileSync(filePath, jsonStringify(renameKeys(data)))
