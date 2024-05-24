@@ -23,7 +23,7 @@ router.get('/:tab/defaults', (req, res) => {
     const data = JSON.parse(readFileSync(filePath(tab)))
     const foundData = data.find((obj) => obj.id === null)
 
-    const defaultData = { ...foundData, id: uuidv4(), dateCreated: now }
+    const defaultData = { ...foundData, id: uuidv4() }
 
     res.send(defaultData)
 })
@@ -40,7 +40,7 @@ router.post('/:tab', (req, res) => {
     const { tab, id } = req.params
     const data = JSON.parse(readFileSync(filePath(tab)))
 
-    data.push({ id: uuidv4(), ...body, dateCreated: now })
+    data.push({ ...body, dateCreated: now })
 
     writeFileSync(filePath(tab), JSON.stringify(data, null, 2))
 
@@ -75,7 +75,7 @@ router.patch('/:tab/:id', (req, res) => {
                     obj[prop] = body[prop]
                 }
             }
-            return obj
+            return { ...obj, dateModified: now }
         }
         return obj
     })
