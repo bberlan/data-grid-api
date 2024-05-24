@@ -50,5 +50,18 @@
     "createdByUserId": null,
     "dateModified": null,
     "modifiedByUserId": null
+  },
+  {
+    "id": "90e0ddd2-b29a-4d3e-96ab-9df0e2226b1e",
+    "make": "Honda",
+    "model": "Jazz",
+    "price": 25300,
+    "electric": false,
+    "dateReleased": "2024-05-15",
+    "countryCode": "JP",
+    "dateCreated": "2024-05-24 10:14:15.858",
+    "createdByUserId": null,
+    "dateModified": "2024-05-24 03:56:55.265",
+    "modifiedByUserId": null
   }
 ]
