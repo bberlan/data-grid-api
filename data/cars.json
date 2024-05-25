@@ -31,11 +31,11 @@
     "model": "Corolla Cross",
     "price": 31600,
     "electric": true,
-    "dateReleased": "2024-02-12",
+    "dateReleased": "2024-02-13",
     "countryCode": "JP",
     "dateCreated": "2024-05-08 15:22:58.081",
     "createdByUserId": null,
-    "dateModified": null,
+    "dateModified": "2024-05-24 09:44:30.289",
     "modifiedByUserId": null
   },
   {

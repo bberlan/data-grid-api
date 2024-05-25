@@ -28,11 +28,19 @@
     "firstName": "Gladys",
     "lastName": "Vance",
     "dateOfBirth": "1961-03-08",
-    "countryOfBirth": "US",
+    "countryOfBirth": "CA",
     "gender": "F",
     "dateCreated": "2024-05-20 15:25:24.467",
     "createdByUserId": null,
-    "dateModified": null,
+    "dateModified": "2024-05-24 11:46:58.165",
     "modifiedByUserId": null
+  },
+  {
+    "id": "7fc5ff51-c2fe-4449-b5bb-cc9baf04fc62",
+    "firstName": "Luffy",
+    "lastName": "Monkey D.",
+    "countryOfBirth": "JP",
+    "gender": "M",
+    "dateCreated": "2024-05-24 04:23:46.643"
   }
 ]
