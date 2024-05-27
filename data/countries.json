@@ -1,4 +1,46 @@
-[{"id":"b8713ee0-0f3e-11ef-9108-426a4b393c84","codeName":"US","shortName":"USA","fullName":"United States","dateCreated":"2024-05-10 19:32:32.858","createdByUserId":null,"dateModified":null,"modifiedByUserId":null},
- {"id":"d0b163e0-0f3e-11ef-9108-426a4b393c84","codeName":"JP","shortName":"JPN","fullName":"Japan","dateCreated":"2024-05-10 19:33:13.544","createdByUserId":null,"dateModified":null,"modifiedByUserId":null},
- {"id":"e2eceb4c-0f3e-11ef-9108-426a4b393c84","codeName":"PH","shortName":"PHL","fullName":"Philippines","dateCreated":"2024-05-10 19:33:44.133","createdByUserId":null,"dateModified":null,"modifiedByUserId":null},
- {"id":"e97c6d40-1702-11ef-9108-426a4b393c84","codeName":"KR","shortName":"KOR","fullName":"South Korea","dateCreated":"2024-05-20 16:44:34.637","createdByUserId":null,"dateModified":null,"modifiedByUserId":null}]
+[
+  {
+    "id": "b8713ee0-0f3e-11ef-9108-426a4b393c84",
+    "codeName": "US",
+    "shortName": "USA",
+    "fullName": "United States",
+    "dateCreated": "2024-05-10 19:32:32.858",
+    "createdByUserId": null,
+    "dateModified": null,
+    "modifiedByUserId": null
+  },
+  {
+    "id": "d0b163e0-0f3e-11ef-9108-426a4b393c84",
+    "codeName": "JP",
+    "shortName": "JPN",
+    "fullName": "Japan",
+    "dateCreated": "2024-05-10 19:33:13.544",
+    "createdByUserId": null,
+    "dateModified": null,
+    "modifiedByUserId": null
+  },
+  {
+    "id": "e2eceb4c-0f3e-11ef-9108-426a4b393c84",
+    "codeName": "PH",
+    "shortName": "PHL",
+    "fullName": "Philippines",
+    "dateCreated": "2024-05-10 19:33:44.133",
+    "createdByUserId": null,
+    "dateModified": null,
+    "modifiedByUserId": null
+  },
+  {
+    "id": "3b819ab1-3ae1-44ad-b35d-3c2187fc22f8",
+    "codeName": "ID",
+    "shortName": "IDN",
+    "fullName": "Indonesia",
+    "dateCreated": "2024-05-24 04:24:47.643"
+  },
+  {
+    "id": "3ece09df-8e4c-41ad-8cef-fd157a0cc7df",
+    "codeName": "CA",
+    "shortName": "CAN",
+    "fullName": "Canada",
+    "dateCreated": "2024-05-24 11:31:40.540"
+  }
+]
