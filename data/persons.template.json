@@ -1,0 +1,12 @@
+{
+  "id": null,
+  "firstName": null,
+  "lastName": null,
+  "dateOfBirth": null,
+  "countryOfBirth": null,
+  "gender": null,
+  "dateCreated": null,
+  "createdByUserId": null,
+  "dateModified": null,
+  "modifiedByUserId": null
+}

@@ -1,31 +1,4 @@
 export default class ColumnDefDto {
-    headerName
-    headerClass
-    field
-    type
-    valueGetter
-    valueFormatter
-    valueSetter
-    keyCreator
-    sortable
-    initialSort
-    filter
-    checkboxSelection
-    headerCheckboxSelection
-    initialHide
-    width
-    flex
-    lockPosition
-    pinned
-    resizable
-    editable
-    cellClass
-    cellRenderer
-    cellEditor
-    cellEditorPopup
-    cellEditorParams
-    suppressSizeToFit
-
     constructor(data) {
         this.headerName = data.headerName ?? undefined
         this.headerClass = data.headerClass ?? undefined

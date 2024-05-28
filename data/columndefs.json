@@ -941,5 +941,92 @@
     "createdByUserId": null,
     "dateModified": null,
     "modifiedByUserId": null
+  },
+  {
+    "id": "d97763d1-3b04-409f-b288-670169f9893a",
+    "columnOrder": 0,
+    "tableName": "addresses",
+    "headerName": "",
+    "field": "select",
+    "sortable": false,
+    "filter": false,
+    "checkboxSelection": true,
+    "headerCheckboxSelection": true,
+    "width": 50,
+    "resizable": false,
+    "editable": true,
+    "dateCreated": "2024-05-28 10:04:58.203"
+  },
+  {
+    "id": "895c3013-d6bd-45d0-95d1-799dfe762a08",
+    "columnOrder": 5,
+    "tableName": "addresses",
+    "headerName": "Street",
+    "field": "street",
+    "sortable": true,
+    "filter": true,
+    "resizable": true,
+    "editable": true,
+    "dateCreated": "2024-05-28 10:04:58.203"
+  },
+  {
+    "id": "c0768702-2c3d-4bf0-b702-325fd7db804a",
+    "columnOrder": 10,
+    "tableName": "addresses",
+    "headerName": "City",
+    "field": "city",
+    "sortable": true,
+    "filter": true,
+    "resizable": true,
+    "editable": true,
+    "dateCreated": "2024-05-28 10:04:58.203"
+  },
+  {
+    "id": "2d5bb9d1-6fe5-477f-a95f-d3a923eb9384",
+    "columnOrder": 15,
+    "tableName": "addresses",
+    "headerName": "State Code",
+    "field": "stateCode",
+    "sortable": true,
+    "filter": true,
+    "resizable": true,
+    "editable": true,
+    "dateCreated": "2024-05-28 10:04:58.203"
+  },
+  {
+    "id": "004627c3-96da-4af4-91fa-391399875c8e",
+    "columnOrder": 20,
+    "tableName": "addresses",
+    "headerName": "Zip Code",
+    "field": "zipCode",
+    "sortable": true,
+    "filter": true,
+    "resizable": true,
+    "editable": true,
+    "dateCreated": "2024-05-28 10:04:58.203"
+  },
+  {
+    "id": "d6b5ec9a-1c29-437d-8935-a962b8c9afcc",
+    "columnOrder": 25,
+    "tableName": "addresses",
+    "headerName": "Country Code",
+    "field": "countryCode",
+    "sortable": true,
+    "filter": true,
+    "resizable": true,
+    "editable": true,
+    "dateCreated": "2024-05-28 10:04:58.203"
+  },
+  {
+    "id": "35387179-b5a7-46c1-bd53-cbd27f6b2e7a",
+    "columnOrder": 25,
+    "tableName": "addresses",
+    "headerName": "County Code",
+    "field": "countyCode",
+    "sortable": true,
+    "filter": true,
+    "resizable": true,
+    "editable": true,
+    "dateCreated": "2024-05-28 12:17:04.612"
   }
 ]

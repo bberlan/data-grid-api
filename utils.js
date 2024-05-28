@@ -23,6 +23,12 @@ function camelCase(key) {
     return key.substring(0, 1).toLowerCase() + key.substring(1)
 }
 
+function headerName(key) {
+    return (key.charAt(0).toUpperCase() + key.slice(1))
+        .split(/(?=[A-Z])/)
+        .join(' ')
+}
+
 function cleanProps(obj) {
     for (const prop in obj) {
         if (
@@ -35,4 +41,4 @@ function cleanProps(obj) {
     return obj
 }
 
-export { jsonStringify, renameKeys, cleanProps }
+export { jsonStringify, renameKeys, cleanProps, headerName }

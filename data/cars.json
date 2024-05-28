@@ -1,18 +1,5 @@
 [
   {
-    "id": null,
-    "make": null,
-    "model": null,
-    "price": 0,
-    "electric": false,
-    "dateReleased": null,
-    "countryCode": null,
-    "dateCreated": null,
-    "createdByUserId": null,
-    "dateModified": null,
-    "modifiedByUserId": null
-  },
-  {
     "id": "3ff3db0a-0d89-11ef-9108-426a4b393c84",
     "make": "Ford",
     "model": "F-Series 2",
