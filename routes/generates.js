@@ -12,6 +12,25 @@ const colPath = path.resolve('.') + '/data/columndefs.json'
 const toolPath = path.resolve('.') + '/data/toolbardefs.json'
 const tempPath = path.resolve('.') + '/data/toolbardefs.template.json'
 const tabPath = (tab) => path.resolve('.') + `/data/${tab}.json`
+const defaultCellRenderer = (value) => {
+    switch (typeof value) {
+        case 'boolean':
+            return 'checkboxCellRenderer'
+        default:
+            return undefined
+    }
+}
+const defaultCellEditor = (value) => {
+    switch (typeof value) {
+        case 'boolean':
+            return 'checkboxCellEditor'
+        case 'string': {
+            if (dayjs(value).isValid()) return 'agDateStringCellEditor'
+        }
+        default:
+            return undefined
+    }
+}
 
 router.post('/:tablename', (req, res) => {
     const { tablename } = req.params
@@ -34,8 +53,8 @@ const genColDefs = (tab, obj) => {
         columndefs.filter(
             (def) => def.tableName === tab && def.field !== 'select'
         ).length + 1
-    const newColDefs = Object.keys(obj).map(
-        (key, i) =>
+    const newColDefs = Object.entries(obj).map(
+        ([key, value], i) =>
             columndefs.some(
                 (def) => def.tableName === tab && def.field === key
             ) ||
@@ -48,7 +67,9 @@ const genColDefs = (tab, obj) => {
                 sortable: true,
                 filter: true,
                 resizable: true,
-                editable: true
+                editable: true,
+                cellRenderer: defaultCellRenderer(value),
+                cellEditor: defaultCellEditor(value)
             })
     )
     if (
