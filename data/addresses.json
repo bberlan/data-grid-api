@@ -1,20 +1,12 @@
 [
   {
-    "id": "2c7daec0-1c84-11ef-88a0-6f151e544b7c",
-    "street": "1615 W Alhambra Rd",
+    "street": "1234 Street",
     "city": "Alhambra",
     "stateCode": "CA",
     "zipCode": 91801,
     "countryCode": "US",
-    "dateCreated": "2024-05-27 11:15:32.935"
-  },
-  {
-    "id": "2c7daec0-1c84-11ef-88a0-6f151e544b72",
-    "street": "1617 W Alhambra Rd",
-    "city": "Alhambra",
-    "stateCode": "CA",
-    "zipCode": 91801,
-    "countryCode": "US",
-    "dateCreated": "2024-05-27 11:18:09.414"
+    "id": "e39caab8-131a-49c2-a395-14bd3a26c3f0",
+    "dateCreated": "2024-05-29 10:29:20.040",
+    "dateModified": "2024-05-29 10:40:49.855"
   }
 ]

@@ -11,7 +11,7 @@ const filePath = (tab) => path.resolve('.') + `/data/${tab}.json`
 router.get('/:tab', (req, res) => {
     const { tab } = req.params
     const data = JSON.parse(readFileSync(filePath(tab)))
-    res.send(data.filter((obj) => obj.id))
+    res.send(data)
 })
 
 router.get('/:tab/defaults', (req, res) => {

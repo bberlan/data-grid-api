@@ -21,19 +21,22 @@ router.get('/:tablename', (req, res) => {
 })
 
 router.post('/generate/:tablename', (req, res) => {
-    const { tablename } = req.params
+    const { tablename: tab } = req.params
     const obj = req.body
-    const columndefs = JSON.parse(readFileSync(filePath))
-
+    const columndefs = JSON.parse(readFileSync(colPath))
+    const count =
+        columndefs.filter(
+            (def) => def.tableName === tab && def.field !== 'select'
+        ).length + 1
     const newColDefs = Object.keys(obj).map(
         (key, i) =>
             columndefs.some(
-                (def) => def.tableName === tablename && def.field === key
+                (def) => def.tableName === tab && def.field === key
             ) ||
             new ColumnDef({
                 id: uuidv4(),
-                columnOrder: (i + 1) * 5,
-                tableName: tablename,
+                columnOrder: (count + i) * 5,
+                tableName: tab,
                 headerName: headerName(key),
                 field: key,
                 sortable: true,
@@ -42,23 +45,47 @@ router.post('/generate/:tablename', (req, res) => {
                 editable: true
             })
     )
-    newColDefs.some((def) => def === true) ||
+    if (
+        !columndefs.some(
+            (def) => def.tableName === tab && def.field === 'select'
+        )
+    ) {
         newColDefs.unshift(
             new ColumnDef({
                 id: uuidv4(),
                 columnOrder: 0,
-                tableName: tablename,
+                tableName: tab,
                 headerName: '',
                 field: 'select',
-                sortable: false,
-                filter: false,
-                resizable: false,
-                editable: true,
                 checkboxSelection: true,
                 headerCheckboxSelection: true,
-                width: 50
+                width: 50,
+                pinned: 'left'
             })
-        )
+        ) &&
+            newColDefs.push(
+                new ColumnDef({
+                    id: uuidv4(),
+                    columnOrder: (newColDefs.length - 1 + count) * 5,
+                    tableName: tab,
+                    headerName: 'Date Created',
+                    field: 'dateCreated',
+                    sortable: true,
+                    resizable: true
+                })
+            ) &&
+            newColDefs.push(
+                new ColumnDef({
+                    id: uuidv4(),
+                    columnOrder: (newColDefs.length - 1 + count) * 5,
+                    tableName: tab,
+                    headerName: 'Date Modified',
+                    field: 'dateModified',
+                    sortable: true,
+                    resizable: true
+                })
+            )
+    }
     // res.send(newColDefs)
     newColDefs.forEach(
         (def) =>

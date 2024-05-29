@@ -1,10 +1,10 @@
 import express from 'express'
 import path from 'path'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { v4 as uuidv4 } from 'uuid'
 import dayjs from 'dayjs'
-import ColumnDefDto from '../dtos/ColumnDefDto.js'
 import ColumnDef from '../models/columndef.js'
+import ToolbarDef from '../models/toolbardef.js'
 import { headerName } from '../utils.js'
 
 const router = express.Router()
@@ -20,6 +20,8 @@ router.post('/:tablename', (req, res) => {
     genColDefs(tablename, obj)
     genToolDefs(tablename)
     genRowData(tablename, obj)
+    genTemplateData(tablename, obj)
+    genSamples(tablename)
 
     res.send(
         `ColumnDefs, ToolbarDefs and RowData for Table ${tablename} is generated.`
@@ -27,11 +29,19 @@ router.post('/:tablename', (req, res) => {
 })
 
 const genColDefs = (tab, obj) => {
+    const columndefs = JSON.parse(readFileSync(colPath))
+    const count =
+        columndefs.filter(
+            (def) => def.tableName === tab && def.field !== 'select'
+        ).length + 1
     const newColDefs = Object.keys(obj).map(
         (key, i) =>
+            columndefs.some(
+                (def) => def.tableName === tab && def.field === key
+            ) ||
             new ColumnDef({
                 id: uuidv4(),
-                columnOrder: (i + 1) * 5,
+                columnOrder: (count + i) * 5,
                 tableName: tab,
                 headerName: headerName(key),
                 field: key,
@@ -41,28 +51,55 @@ const genColDefs = (tab, obj) => {
                 editable: true
             })
     )
-    newColDefs.unshift(
-        new ColumnDef({
-            id: uuidv4(),
-            columnOrder: 0,
-            tableName: tab,
-            headerName: '',
-            field: 'select',
-            sortable: false,
-            filter: false,
-            resizable: false,
-            editable: true,
-            checkboxSelection: true,
-            headerCheckboxSelection: true,
-            width: 50
-        })
-    )
-    const columndefs = JSON.parse(readFileSync(filePath))
-    newColDefs.forEach((def) =>
-        columndefs.push({
-            ...def,
-            dateCreated: dayjs().format('YYYY-MM-DD hh:mm:ss.SSS')
-        })
+    if (
+        !columndefs.some(
+            (def) => def.tableName === tab && def.field === 'select'
+        )
+    ) {
+        newColDefs.unshift(
+            new ColumnDef({
+                id: uuidv4(),
+                columnOrder: 0,
+                tableName: tab,
+                headerName: '',
+                field: 'select',
+                checkboxSelection: true,
+                headerCheckboxSelection: true,
+                width: 50,
+                pinned: 'left'
+            })
+        ) &&
+            newColDefs.push(
+                new ColumnDef({
+                    id: uuidv4(),
+                    columnOrder: (newColDefs.length - 1 + count) * 5,
+                    tableName: tab,
+                    headerName: 'Date Created',
+                    field: 'dateCreated',
+                    sortable: true,
+                    resizable: true
+                })
+            ) &&
+            newColDefs.push(
+                new ColumnDef({
+                    id: uuidv4(),
+                    columnOrder: (newColDefs.length - 1 + count) * 5,
+                    tableName: tab,
+                    headerName: 'Date Modified',
+                    field: 'dateModified',
+                    sortable: true,
+                    resizable: true
+                })
+            )
+    }
+
+    newColDefs.forEach(
+        (def) =>
+            typeof def === 'object' &&
+            columndefs.push({
+                ...def,
+                dateCreated: dayjs().format('YYYY-MM-DD hh:mm:ss.SSS')
+            })
     )
     writeFileSync(colPath, JSON.stringify(columndefs, null, 2))
 }
@@ -103,6 +140,31 @@ const genRowData = (tab, obj) => {
     })
 
     writeFileSync(tabPath(tab), JSON.stringify(data, null, 2))
+}
+
+const genTemplateData = (tab, obj) => {
+    const template = existsSync(tabPath(tab.concat('.template')))
+        ? JSON.parse(readFileSync(tabPath(tab.concat('.template'))))
+        : {}
+    Object.keys(obj).forEach(
+        (key) =>
+            // Object.keys(template).some((key2) => key2 === key) ||
+            // (template[key] = null)
+            Object.hasOwn(template, key) ||
+            Object.assign(template, { [key]: null })
+    )
+    writeFileSync(
+        tabPath(tab.concat('.template')),
+        // JSON.stringify(obj, (key, value) => (key.length ? null : value), 2)
+        JSON.stringify(template, null, 2)
+    )
+}
+
+const genSamples = (tab) => {
+    const samples = JSON.parse(readFileSync(tabPath('samples')))
+    samples.some((item) => item.sample.toLowerCase() === tab.toLowerCase()) ||
+        samples.push({ sample: tab.charAt(0).toUpperCase() + tab.slice(1) })
+    writeFileSync(tabPath('samples'), JSON.stringify(samples, null, 2))
 }
 
 export default router
