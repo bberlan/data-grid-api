@@ -1,29 +1,25 @@
 import express from 'express'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 import dayjs from 'dayjs'
 import { jsonStringify } from '../utils.js'
-import { table } from 'console'
 
 const router = express.Router()
-
-const now = dayjs().format('YYYY-MM-DD hh:mm:ss.SSS')
-
 const filePath = (tab) => path.resolve('.') + `/data/${tab}.json`
 
 router.get('/:tab', (req, res) => {
     const { tab } = req.params
     const data = JSON.parse(readFileSync(filePath(tab)))
-    res.send(data.filter((obj) => obj.id))
+    res.send(data)
 })
 
 router.get('/:tab/defaults', (req, res) => {
     const { tab } = req.params
-    const data = JSON.parse(readFileSync(filePath(tab)))
-    const foundData = data.find((obj) => obj.id === null)
+    const data = JSON.parse(readFileSync(filePath(tab.concat('.template'))))
+    // const foundData = data.find((obj) => obj.id === null)
 
-    const defaultData = { ...foundData, id: uuidv4() }
+    const defaultData = { ...data, id: uuidv4() }
 
     res.send(defaultData)
 })
@@ -37,14 +33,21 @@ router.get('/:tab/:id', (req, res) => {
 
 router.post('/:tab', (req, res) => {
     const body = req.body
-    const { tab, id } = req.params
-    const data = JSON.parse(readFileSync(filePath(tab)))
+    const { tab } = req.params
 
-    data.push({ ...body, dateCreated: now })
+    const data = existsSync(filePath(tab))
+        ? JSON.parse(readFileSync(filePath(tab)))
+        : []
+
+    data.push({
+        ...body,
+        id: body.id ?? uuidv4(),
+        dateCreated: dayjs().format('YYYY-MM-DD hh:mm:ss.SSS')
+    })
 
     writeFileSync(filePath(tab), JSON.stringify(data, null, 2))
 
-    res.send(`Id ${id} has been added to the Database`)
+    res.send(`Id ${body.id} has been added to the Database`)
 })
 
 router.delete('/:tab/:id', (req, res) => {
@@ -71,11 +74,14 @@ router.patch('/:tab/:id', (req, res) => {
     const updatedData = data.map((obj) => {
         if (obj.id === id) {
             for (const prop in obj) {
-                if (body[prop]) {
+                if (body[prop] !== undefined) {
                     obj[prop] = body[prop]
                 }
             }
-            return { ...obj, dateModified: now }
+            return {
+                ...obj,
+                dateModified: dayjs().format('YYYY-MM-DD hh:mm:ss.SSS')
+            }
         }
         return obj
     })

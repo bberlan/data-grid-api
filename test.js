@@ -1,11 +1,18 @@
 import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
-import cars from './data/cars.js'
+import ColumnDef from './models/columndef.js'
+// import Address from './models/address.js'
 
 const filePath = path.resolve('.') + '/data/cars.json'
 // const destPath = path.resolve('.') + '/data/cars.json'
 
 const data = JSON.parse(readFileSync(filePath))
+
+function createNewColDefs() {
+    // const newColDef = new ColumnDef()
+    // const newAddress = new Address()
+    console.log(newAddress)
+}
 
 function renameKeys(data) {
     return data.map((obj) =>
@@ -44,6 +51,12 @@ function camelCase(key) {
     return key.substring(0, 1).toLowerCase() + key.substring(1)
 }
 
+function haederName(key) {
+    return (key.charAt(0).toUpperCase() + key.slice(1))
+        .split(/(?=[A-Z])/)
+        .join(' ')
+}
+
 function jsonStringify(data) {
     return Array.isArray(data)
         ? '[' + data.map((e) => JSON.stringify(e)).join(',\n ') + ']'
@@ -68,9 +81,13 @@ function booleanReplacer(key, value) {
     return value
 }
 
+console.log(haederName('countryACode'))
+
+// createNewColDefs()
+
 // console.log(JSON.stringify(data, booleanReplacer, 2))
 
-writeFileSync(filePath, JSON.stringify(data, booleanReplacer, 2))
+// writeFileSync(filePath, JSON.stringify(data, booleanReplacer, 2))
 
 // function keyReplacer(key, value) {
 //     return [camelCase(key)]
